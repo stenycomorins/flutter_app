@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/home/index.dart';
 import '../index.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final pswdController = TextEditingController();
-  late Future<LoginModel> _futureLoginData;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,19 +54,18 @@ class _LoginState extends State<LoginScreen> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 var reqData = {
                   "email": emailController.text,
                   "password": pswdController.text,
                 };
-                print(reqData);
-                setState(() {
-                  _futureLoginData = login(reqData);
-                });
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => const HomeScreen()));
+                var loginData = await login(reqData);
+                if (loginData.token == "QpwL5tke4Pnpja7X4") {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()));
+                }
               },
               child: const Text('Login'),
             )
