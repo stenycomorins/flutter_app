@@ -12,8 +12,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginScreen> {
-  final emailController = TextEditingController();
-  final pswdController = TextEditingController();
+  final mobileController = TextEditingController();
+  final pinController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,36 +35,52 @@ class _LoginState extends State<LoginScreen> {
             Padding(
               padding: const EdgeInsets.all(15),
               child: TextField(
-                controller: emailController,
+                controller: mobileController,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email ID as abc@gmail.com'),
+                    labelText: 'Mobile Number',
+                    hintText: 'Enter valid Mobile Number'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(15),
               child: TextField(
-                controller: pswdController,
+                controller: pinController,
                 obscureText: true,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Password',
+                    labelText: 'Pin',
                     hintText: 'Enter Secure Password'),
               ),
             ),
             ElevatedButton(
               onPressed: () async {
                 var reqData = {
-                  "email": emailController.text,
-                  "password": pswdController.text,
+                  "country_code": "UGA",
+                  "mobile_num": mobileController.text,
+                  "pin": pinController.text
                 };
                 var loginData = await login(reqData);
-                if (loginData.token == "QpwL5tke4Pnpja7X4") {
+                if (loginData.status == "success") {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
+                          builder: (context) => HomeScreen(
+                              accessToken: loginData.data.accessToken)));
+                } else {
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Error'),
+                      content: Text(loginData.message),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'OK'),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
                 }
               },
               child: const Text('Login'),

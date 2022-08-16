@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter_app/home/index.dart';
 import 'package:http/http.dart' as http;
 
-const url = "https://reqres.in/api/login";
-
 Future<Userslistmodel> fetchUsersList() async {
   final http.Response response =
       await http.get(Uri.parse("https://reqres.in/api/users?page=2"));

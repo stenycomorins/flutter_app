@@ -18,14 +18,14 @@ class Userslistmodel {
   int perPage;
   int total;
   int totalPages;
-  List<Datum> data;
+  List<Users> data;
 
   factory Userslistmodel.fromJson(Map<String, dynamic> json) => Userslistmodel(
         page: json["page"],
         perPage: json["per_page"],
         total: json["total"],
         totalPages: json["total_pages"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<Users>.from(json["data"].map((x) => Users.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,8 +37,8 @@ class Userslistmodel {
       };
 }
 
-class Datum {
-  Datum({
+class Users {
+  Users({
     required this.id,
     required this.email,
     required this.firstName,
@@ -52,7 +52,7 @@ class Datum {
   String lastName;
   String avatar;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Users.fromJson(Map<String, dynamic> json) => Users(
         id: json["id"],
         email: json["email"],
         firstName: json["first_name"],
