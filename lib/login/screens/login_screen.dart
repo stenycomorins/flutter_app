@@ -19,12 +19,11 @@ class _LoginState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(title: const Text('Login Home')),
         body: SingleChildScrollView(
             child: Column(
           children: <Widget>[
             const Padding(
-              padding: EdgeInsets.only(top: 60.0),
+              padding: EdgeInsets.only(top: 100.0),
               child: Center(
                   child: CircleAvatar(
                 backgroundImage: NetworkImage(
