@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home/index.dart';
 import 'package:flutter_app/login/index.dart';
@@ -50,11 +51,15 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
+                title: const Text('TakePicture'),
+                onTap: () async {
+                  Navigator.pop(context);
+                  await availableCameras().then((value) => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              TakePictureScreen(cameras: value))));
+                }),
             ListTile(
               title: const Text('Logout'),
               onTap: () {

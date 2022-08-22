@@ -1,6 +1,7 @@
 //screens
 export 'screens/home_screen.dart';
 export 'screens/userslist_screen.dart';
+export 'screens/take_picture_screen.dart';
 
 //models
 export 'domain/models/home_data_model.dart';
