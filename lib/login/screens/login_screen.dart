@@ -1,7 +1,6 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home/index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../index.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,8 +11,29 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginScreen> {
-  final mobileController = TextEditingController();
-  final pinController = TextEditingController();
+  final mobileController = TextEditingController(text: "700832693");
+  final pinController = TextEditingController(text: "1234");
+  late SharedPreferences prefs;
+  late bool isLoggedIn;
+
+  @override
+  void initState() {
+    super.initState();
+    checkIfLoggedAlready();
+  }
+
+  void checkIfLoggedAlready() async {
+    prefs = await SharedPreferences.getInstance();
+    isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    if (isLoggedIn) {
+      navigate();
+    }
+  }
+
+  void navigate() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const Home()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +81,9 @@ class _LoginState extends State<LoginScreen> {
                 };
                 var loginData = await login(reqData);
                 if (loginData.status == "success") {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomeScreen(
-                              accessToken: loginData.data.accessToken)));
+                  prefs.setBool('login', false);
+                  prefs.setString('token', loginData.data.accessToken);
+                  navigate();
                 } else {
                   showDialog<String>(
                     context: context,

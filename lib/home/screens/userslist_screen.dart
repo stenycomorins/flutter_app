@@ -21,7 +21,7 @@ class _UsersListScreenState extends State<UsersListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text("UsersListScreen")),
+      appBar: AppBar(title: const Text("UsersList")),
       body: FutureBuilder<Userslistmodel>(
         future: userslist,
         builder: (context, snapshot) {

@@ -2,6 +2,10 @@
 export 'screens/home_screen.dart';
 export 'screens/userslist_screen.dart';
 export 'screens/take_picture_screen.dart';
+export 'screens/profile_screen.dart';
+
+//widgets
+export 'widgets/drawer.dart';
 
 //models
 export 'domain/models/home_data_model.dart';
