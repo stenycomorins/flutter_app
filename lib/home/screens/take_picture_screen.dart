@@ -5,9 +5,11 @@ import 'dart:async';
 import 'dart:io';
 
 class TakePictureScreen extends StatefulWidget {
-  final List<CameraDescription>? cameras;
+  final List<CameraDescription> cameras;
 
   const TakePictureScreen({super.key, required this.cameras});
+
+  static const routeName = '/camerascreen';
 
   @override
   State<TakePictureScreen> createState() => _TakePictureScreenState();
@@ -21,7 +23,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
   @override
   void initState() {
     super.initState();
-    initCamera(widget.cameras![0]);
+    initCamera(widget.cameras[0]);
   }
 
   @override
@@ -75,7 +77,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                             setState(() =>
                                 _isRearCameraSelected = !_isRearCameraSelected);
                             initCamera(
-                                widget.cameras![_isRearCameraSelected ? 0 : 1]);
+                                widget.cameras[_isRearCameraSelected ? 0 : 1]);
                           },
                         )),
                         Expanded(

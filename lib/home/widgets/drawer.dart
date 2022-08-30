@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_app/home/index.dart';
-import 'package:flutter_app/login/index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
+
+  Future<bool> onLogout() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isLoggedIn', false);
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,28 +33,25 @@ class DrawerScreen extends StatelessWidget {
             title: const Text('UsersList'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const UsersListScreen()));
+              Navigator.pushNamed(context, './userslist');
             },
           ),
           ListTile(
               title: const Text('TakePicture'),
               onTap: () async {
                 Navigator.pop(context);
-                await availableCameras().then((value) => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            TakePictureScreen(cameras: value))));
+                await availableCameras().then((value) => Navigator.pushNamed(
+                    context, TakePictureScreen.routeName,
+                    arguments: value));
               }),
           ListTile(
             title: const Text('Logout'),
             onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+              onLogout().then((value) => {
+                    if (value) {Navigator.pushReplacementNamed(context, '/')}
+                  });
+              // ;
+              // ;
             },
           )
         ],

@@ -1,4 +1,6 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/home/index.dart';
 import 'login/index.dart';
 
 void main() {
@@ -10,9 +12,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter App',
-      home: LoginScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/home': (context) => const TabNavigation(),
+        '/userslist': (context) => const UsersListScreen(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == TakePictureScreen.routeName) {
+          final args = settings.arguments as List<CameraDescription>;
+          return MaterialPageRoute(
+            builder: (context) {
+              return TakePictureScreen(cameras: args);
+            },
+          );
+        }
+        return null;
+      },
     );
   }
 }

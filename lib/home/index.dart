@@ -6,6 +6,7 @@ export 'screens/profile_screen.dart';
 
 //widgets
 export 'widgets/drawer.dart';
+export 'widgets/tab_navigator.dart';
 
 //models
 export 'domain/models/home_data_model.dart';

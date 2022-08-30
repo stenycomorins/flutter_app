@@ -31,8 +31,7 @@ class _LoginState extends State<LoginScreen> {
   }
 
   void navigate() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const Home()));
+    Navigator.pushNamed(context, '/home');
   }
 
   @override
@@ -81,7 +80,7 @@ class _LoginState extends State<LoginScreen> {
                 };
                 var loginData = await login(reqData);
                 if (loginData.status == "success") {
-                  prefs.setBool('login', false);
+                  prefs.setBool('isLoggedIn', true);
                   prefs.setString('token', loginData.data.accessToken);
                   navigate();
                 } else {
