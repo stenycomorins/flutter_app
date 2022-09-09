@@ -95,7 +95,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
                                 ),
                               );
                             } catch (e) {
-                              print(e);
+                              throw Exception(e);
                             }
                           },
                           iconSize: 50,

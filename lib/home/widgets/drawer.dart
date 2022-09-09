@@ -33,7 +33,7 @@ class DrawerScreen extends StatelessWidget {
             title: const Text('UsersList'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, './userslist');
+              Navigator.pushNamed(context, '/userslist');
             },
           ),
           ListTile(
@@ -50,8 +50,6 @@ class DrawerScreen extends StatelessWidget {
               onLogout().then((value) => {
                     if (value) {Navigator.pushReplacementNamed(context, '/')}
                   });
-              // ;
-              // ;
             },
           )
         ],
