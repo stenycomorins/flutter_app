@@ -77,26 +77,27 @@ class _LoginState extends State<LoginScreen> {
                   "mobile_num": mobileController.text,
                   "pin": pinController.text
                 };
-                var loginData = await login(reqData);
-                if (loginData.status == "success") {
+                // var loginData = await login(reqData);
+                // if (loginData.status == "success") {
                   prefs.setBool('isLoggedIn', true);
-                  prefs.setString('token', loginData.data.accessToken);
+                  prefs.setString('token', 'loginData.data.accessToken');
+                  // prefs.setString('token', loginData.data.accessToken);
                   navigate();
-                } else {
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Error'),
-                      content: Text(loginData.message),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'OK'),
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                }
+                // } else {
+                //   showDialog<String>(
+                //     context: context,
+                //     builder: (BuildContext context) => AlertDialog(
+                //       title: const Text('Error'),
+                //       content: Text(loginData.message),
+                //       actions: <Widget>[
+                //         TextButton(
+                //           onPressed: () => Navigator.pop(context, 'OK'),
+                //           child: const Text('OK'),
+                //         ),
+                //       ],
+                //     ),
+                //   );
+                // }
               },
               child: const Text('Login'),
             )
